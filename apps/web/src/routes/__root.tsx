@@ -1,21 +1,14 @@
-import Loader from "@/components/loader";
-import { ThemeProvider, useTheme } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import type { trpc } from "@/utils/trpc";
 import type { QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { useHotkeys } from "react-hotkeys-hook"
 import {
   HeadContent,
   Outlet,
   createRootRouteWithContext,
-  useRouterState,
 } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import "../index.css";
 
 export interface RouterAppContext {
-  trpc: typeof trpc;
   queryClient: QueryClient;
 }
 
@@ -24,11 +17,11 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
   head: () => ({
     meta: [
       {
-        title: "my-better-t-app",
+        title: "Scam Vault Dashboard",
       },
       {
         name: "description",
-        content: "my-better-t-app is a web application",
+        content: "A free, public API that collects and shares information about ongoing scams, helping developers and platforms protect users from fraud.",
       },
     ],
     links: [{
@@ -40,9 +33,9 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 });
 
 function RootComponent() {
-  const isFetching = useRouterState({
-    select: (s) => s.isLoading,
-  });
+  // const isFetching = useRouterState({
+  //   select: (s) => s.isLoading,
+  // });
 
   return (
     <>

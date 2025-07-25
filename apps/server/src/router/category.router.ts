@@ -1,5 +1,5 @@
 import type { HonoAppType } from "../types";
-import { Hono } from "hono/tiny";
+import { Hono } from "hono/quick";
 import { getCategories, createCategory, updateCategory, deleteCategory, getCategory } from "@/controller/category.controller"
 
 const categoryRouter = new Hono<HonoAppType>()

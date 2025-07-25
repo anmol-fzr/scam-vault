@@ -1,4 +1,4 @@
-import { Hono } from 'hono/tiny'
+import { Hono } from 'hono/quick'
 import { categoryRouter, scamRouter } from '@/router'
 import { cors } from 'hono/cors'
 import { HonoAppType } from './types'

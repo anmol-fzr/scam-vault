@@ -1,5 +1,5 @@
 import type { HonoAppType } from "../types";
-import { Hono } from "hono/tiny";
+import { Hono } from "hono/quick";
 import { getScams, createScam, updateScam } from "@/controller/scam.controller"
 
 const scamRouter = new Hono<HonoAppType>()
