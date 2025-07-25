@@ -3,9 +3,8 @@ import ReactDOM from "react-dom/client";
 import Loader from "./components/loader";
 import { routeTree } from "./routeTree.gen";
 
-  import { QueryClientProvider } from "@tanstack/react-query";
-  import { queryClient, trpc } from "./utils/trpc";
-
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient, trpc } from "./utils/trpc";
 const router = createRouter({
   routeTree,
   defaultPreload: "intent",

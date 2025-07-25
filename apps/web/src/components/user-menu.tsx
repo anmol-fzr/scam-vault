@@ -13,6 +13,7 @@ import { Skeleton } from "./ui/skeleton";
 import { Link } from "@tanstack/react-router";
 
 export default function UserMenu() {
+  return <></>
   const navigate = useNavigate();
   const { data: session, isPending } = authClient.useSession();
 

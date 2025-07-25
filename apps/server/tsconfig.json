@@ -2,20 +2,17 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "bundler",
-    "verbatimModuleSyntax": true,
+    "moduleResolution": "Bundler",
     "strict": true,
     "skipLibCheck": true,
-    "baseUrl": "./",
+    "lib": [
+      "ESNext"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
     "paths": {
       "@/*": ["./src/*"]
-          },
-    "outDir": "./dist",
-    "types": [
-      "bun"
-    ],
-    "composite": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    },
+    "types": ["worker-configuration.d.ts"]
   }
 }

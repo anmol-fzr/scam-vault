@@ -1,10 +1,10 @@
-import Header from "@/components/header";
 import Loader from "@/components/loader";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import type { trpc } from "@/utils/trpc";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { useHotkeys } from "react-hotkeys-hook"
 import {
   HeadContent,
   Outlet,
@@ -31,11 +31,10 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
         content: "my-better-t-app is a web application",
       },
     ],
-    links: [
-      {
-        rel: "icon",
-        href: "/favicon.ico",
-      },
+    links: [{
+      rel: "icon",
+      href: "/favicon.ico",
+    },
     ],
   }),
 });
@@ -44,7 +43,6 @@ function RootComponent() {
   const isFetching = useRouterState({
     select: (s) => s.isLoading,
   });
-
 
   return (
     <>
@@ -56,13 +54,17 @@ function RootComponent() {
         storageKey="vite-ui-theme"
       >
         <div className="grid grid-rows-[auto_1fr] h-svh">
-          <Header />
+          {/*
           {isFetching ? <Loader /> : <Outlet />}
+          */}
+          <Outlet />
         </div>
         <Toaster richColors />
       </ThemeProvider>
+      {/*
       <TanStackRouterDevtools position="bottom-left" />
       <ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
+      */}
     </>
   );
 }

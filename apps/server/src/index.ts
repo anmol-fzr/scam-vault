@@ -1,36 +1,25 @@
-import "dotenv/config";
-import { trpcServer } from "@hono/trpc-server";
-import { createContext } from "./lib/context";
-import { appRouter } from "./routers/index";
-import { auth } from "./lib/auth";
-import { Hono } from "hono";
-import { cors } from "hono/cors";
-import { logger } from "hono/logger";
+import { Hono } from 'hono/tiny'
+import { categoryRouter, scamRouter } from '@/router'
+import { cors } from 'hono/cors'
+import { HonoAppType } from './types'
+import { auth } from './lib/better-auth'
 
-const app = new Hono();
+const app = new Hono<HonoAppType>()
 
-app.use(logger());
-app.use("/*", cors({
-  origin: process.env.CORS_ORIGIN || "",
-  allowMethods: ["GET", "POST", "OPTIONS"],
-  allowHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
+app.use(cors({
+  origin: (_origin, c) => c.env.CORS_ORIGIN_URL,
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
 
-app.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
+app.get('/', (c) => c.text('OK!'))
 
+const routes = app
+  .route("/category", categoryRouter)
+  .route("/scam", scamRouter)
 
-app.use("/trpc/*", trpcServer({
-  router: appRouter,
-  createContext: (_opts, context) => {
-    return createContext({ context });
-  },
-}));
+app.on(['GET', 'POST'], '/api/*', (c) => auth(c.env).handler(c.req.raw));
 
-
-
-app.get("/", (c) => {
-  return c.text("OK");
-});
-
-export default app;
+export default app
+export type ApiRoutes = typeof routes
