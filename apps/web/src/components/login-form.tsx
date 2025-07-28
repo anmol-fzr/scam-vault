@@ -11,19 +11,25 @@ import { GithubIcon } from "lucide-react"
 import { signIn } from "@/lib/auth-client"
 
 
-const handleGithubLogin = async () => {
-  await signIn.social({
-    provider: "github",
-    callbackURL: "/dashboard"
-  })
-}
-
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+
+  const handleGithubLogin = async () => {
+    console.log("handleGithubLogin");
+
+    const { origin } = window.location
+
+    await signIn.social({
+      provider: "github",
+      callbackURL: `${origin}/dashboard`
+    })
+  }
+
+
   return (
-    <div className={cn("flex flex-col gap-6 min-w-96", className)} {...props}>
+    <div className={cn("flex flex-col gap-6 min-w-96 z-100", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome back</CardTitle>

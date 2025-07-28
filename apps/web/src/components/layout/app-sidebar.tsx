@@ -17,7 +17,7 @@ import { Button } from '../ui/button'
 import { Plus } from 'lucide-react'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: orgs, isPending } = useListOrganizations()
+  // const { data: orgs, isPending } = useListOrganizations()
 
   const { data: sessionData, isPending: isSessionPending } = useGetSession()
 
@@ -26,11 +26,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible='icon' variant='floating' {...props}>
       <SidebarHeader>
+        {/*
         {isPending ? (
           <LoadingTeamSwitcher />
         ) : (
           <OrgSwitcher orgs={orgs} />
         )}
+        */}
         <NewApiKeyDialog>
           <Button>
             <Plus className='size-4' />

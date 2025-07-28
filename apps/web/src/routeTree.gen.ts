@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as authenticatedRouteRouteImport } from './routes/(authenticated)/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as authenticatedHelpCenterRouteImport } from './routes/(authenticated)/help-center'
 import { Route as authenticatedDashboardRouteImport } from './routes/(authenticated)/dashboard'
 import { Route as authenticatedApiKeysRouteImport } from './routes/(authenticated)/api-keys'
@@ -24,6 +25,11 @@ const authenticatedRouteRoute = authenticatedRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const authenticatedHelpCenterRoute = authenticatedHelpCenterRouteImport.update({
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/api-keys': typeof authenticatedApiKeysRoute
   '/dashboard': typeof authenticatedDashboardRoute
   '/help-center': typeof authenticatedHelpCenterRoute
+  '/auth/login': typeof AuthLoginRoute
   '/settings/account': typeof authenticatedSettingsAccountRoute
 }
 export interface FileRoutesByTo {
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/api-keys': typeof authenticatedApiKeysRoute
   '/dashboard': typeof authenticatedDashboardRoute
   '/help-center': typeof authenticatedHelpCenterRoute
+  '/auth/login': typeof AuthLoginRoute
   '/settings/account': typeof authenticatedSettingsAccountRoute
 }
 export interface FileRoutesById {
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/(authenticated)/api-keys': typeof authenticatedApiKeysRoute
   '/(authenticated)/dashboard': typeof authenticatedDashboardRoute
   '/(authenticated)/help-center': typeof authenticatedHelpCenterRoute
+  '/auth/login': typeof AuthLoginRoute
   '/(authenticated)/settings/account': typeof authenticatedSettingsAccountRoute
 }
 export interface FileRouteTypes {
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/api-keys'
     | '/dashboard'
     | '/help-center'
+    | '/auth/login'
     | '/settings/account'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/api-keys'
     | '/dashboard'
     | '/help-center'
+    | '/auth/login'
     | '/settings/account'
   id:
     | '__root__'
@@ -105,12 +116,14 @@ export interface FileRouteTypes {
     | '/(authenticated)/api-keys'
     | '/(authenticated)/dashboard'
     | '/(authenticated)/help-center'
+    | '/auth/login'
     | '/(authenticated)/settings/account'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authenticatedRouteRoute: typeof authenticatedRouteRouteWithChildren
+  AuthLoginRoute: typeof AuthLoginRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -127,6 +140,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(authenticated)/help-center': {
@@ -201,6 +221,7 @@ const authenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authenticatedRouteRoute: authenticatedRouteRouteWithChildren,
+  AuthLoginRoute: AuthLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -32,15 +32,15 @@ import { NewOrgForm } from "./new-org-form"
 //   'Caleb',
 // ]
 
-export function NewOrgDialog() {
+export function NewOrgDialog({ open = false }) {
   return (
-    <Dialog>
+    <Dialog defaultOpen={open}>
       <DialogTrigger asChild>
         <button className='flex gap-2 p-2'>
           <div className='bg-background flex size-6 items-center justify-center rounded-md border'>
             <Plus className='size-4' />
           </div>
-          <div className='text-muted-foreground font-medium'>Add team</div>
+          <div className='text-muted-foreground font-medium'>Add Organization</div>
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

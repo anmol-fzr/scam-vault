@@ -13,7 +13,7 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'Dashboard',
-          url: '/',
+          url: '/dashboard',
           icon: IconLayoutDashboard,
         },
         {

@@ -4,9 +4,6 @@ import { cn } from '@/lib/utils'
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { Outlet } from '@tanstack/react-router'
 import { getSessionQueryOps } from '@/hooks/auth/useGetSession'
-import { useTheme } from 'next-themes'
-import { useHotkeys } from 'react-hotkeys-hook'
-import { toast } from 'sonner'
 
 export const Route = createFileRoute('/(authenticated)')({
   component: Dashboard,
@@ -21,16 +18,6 @@ export const Route = createFileRoute('/(authenticated)')({
 })
 
 function Dashboard() {
-  const theme = useTheme();
-
-  useHotkeys('alt+t', evt => {
-    evt.preventDefault()
-    theme.setTheme(curr => {
-      toast.info(`Theme Changed to ${curr === "light" ? "Dark" : "Light"} `)
-      return curr === "light" ? "dark" : "light"
-    })
-  })
-
   return (
     <>
       <SidebarProvider defaultOpen={!true}>

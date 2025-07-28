@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import type { QueryClient } from "@tanstack/react-query";
 import {
@@ -7,6 +7,8 @@ import {
   createRootRouteWithContext,
 } from "@tanstack/react-router";
 import "../index.css";
+import { useHotkeys } from "react-hotkeys-hook";
+import { toast } from "sonner";
 
 export interface RouterAppContext {
   queryClient: QueryClient;
@@ -50,7 +52,9 @@ function RootComponent() {
           {/*
           {isFetching ? <Loader /> : <Outlet />}
           */}
-          <Outlet />
+          <KeybindingsProvider>
+            <Outlet />
+          </KeybindingsProvider>
         </div>
         <Toaster richColors />
       </ThemeProvider>
@@ -60,4 +64,18 @@ function RootComponent() {
       */}
     </>
   );
+}
+
+const KeybindingsProvider = ({ children }) => {
+  const theme = useTheme();
+
+  useHotkeys('alt+t', evt => {
+    evt.preventDefault()
+    theme.setTheme(curr => {
+      toast.info(`Theme Changed to ${curr === "light" ? "Dark" : "Light"} `)
+      return curr === "light" ? "dark" : "light"
+    })
+  })
+
+  return children
 }

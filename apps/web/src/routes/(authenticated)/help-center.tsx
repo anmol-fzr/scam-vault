@@ -1,4 +1,4 @@
-import { Bug, Sparkles, Shield, ScrollText } from "lucide-react/icons"
+import { Bug, Sparkles, Shield, ScrollText } from "lucide-react"
 import { H1, H2, P } from '@/components/ui/typography'
 import { createFileRoute, Link } from '@tanstack/react-router'
 

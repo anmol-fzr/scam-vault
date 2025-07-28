@@ -19,6 +19,7 @@ import { Skeleton } from '../ui/skeleton'
 import { organization, useActiveOrganization } from '@/lib/auth-client'
 import type { Organization } from '@/lib/auth-client'
 import { cn } from '@/lib/utils'
+import { NewOrgForm } from '../org/new-org-form'
 
 export function OrgSwitcher({
   orgs,
@@ -29,6 +30,10 @@ export function OrgSwitcher({
   let { data: activeOrg, isPending } = useActiveOrganization()
 
   activeOrg = activeOrg ?? orgs[0]
+
+  if (activeOrg === null || activeOrg === undefined) {
+    return <NewOrgDialog open />
+  }
 
   return (
     <SidebarMenu>

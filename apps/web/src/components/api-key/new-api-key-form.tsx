@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Form } from "@/components/ui/form"
@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button"
 import { FormInput } from "../form"
 import { apiKey } from "@/lib/auth-client"
 import { toast } from "sonner"
-import { CopyIcon } from "lucide-react/icons"
+import { CopyIcon } from "lucide-react"
 import { createApiKeySchema } from "@/schema/api.schema"
 import { placeholders } from "@/utils/placeholders"
+import { queryClient } from "@/main"
 
 const copyToClipboard = (content: string) => {
   return navigator.clipboard.writeText(content)
@@ -41,16 +42,19 @@ export function NewApiKeyForm() {
         description: "Please Try after sometime"
       }
     })
+    queryClient.invalidateQueries({
+      queryKey: ["API", "KEYS"]
+    })
   })
 
-  const handleCopy = () => {
+  const handleCopy = useCallback(() => {
     const prms = copyToClipboard(currKey)
     toast.promise(prms, {
       loading: "Copying API Key to Clipboard",
       success: "API Key Copied to Clipboard",
       error: "Unable to Copy API Key"
     })
-  }
+  }, [currKey])
 
   const disabled = form.formState.isSubmitting
 
