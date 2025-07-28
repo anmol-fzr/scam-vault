@@ -6,10 +6,21 @@
     "deploy": "wrangler deploy --minify --env prod",
     "cf-typegen": "wrangler types --env dev --env-interface CloudflareBindings",
     "auth:generate": "pnpm dlx @better-auth/cli@latest generate --config ./better-auth.config.ts --output ./src/db/schema/auth.ts",
-    "db:generate": "bun run --env-file=.dev.vars.prod drizzle-kit generate",
-    "db:dev:migrate": "bun run --env-file=.dev.vars.dev drizzle-kit migrate",
-    "db:prod:migrate": "bun run --env-file=.dev.vars.prod drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+
+    "db:dev:generate": "bun run --env-file=.dev.vars.dev drizzle-kit generate --config=drizzle.config.dev.ts",
+    "db:prod:generate": "bun run --env-file=.dev.vars.prod drizzle-kit generate --config=drizzle.config.prod.ts",
+
+    "db:dev:migrate": "bun run --env-file=.dev.vars.dev drizzle-kit migrate --config=drizzle.config.dev.ts",
+    "db:prod:migrate": "bun run --env-file=.dev.vars.prod drizzle-kit migrate --config=drizzle.config.prod.ts",
+
+    "db:dev:pull": "bun run --env-file=.dev.vars.dev drizzle-kit pull --config=drizzle.config.dev.ts",
+    "db:prod:pull": "bun run --env-file=.dev.vars.prod drizzle-kit pull --config=drizzle.config.prod.ts",
+
+    "db:dev:push": "bun run --env-file=.dev.vars.dev drizzle-kit push --config=drizzle.config.dev.ts",
+    "db:prod:push": "bun run --env-file=.dev.vars.prod drizzle-kit push --config=drizzle.config.prod.ts",
+
+    "db:dev:studio": "bun run --env-file=.dev.vars.dev drizzle-kit studio --config=drizzle.config.dev.ts",
+    "db:prod:studio": "bun run --env-file=.dev.vars.prod drizzle-kit studio --config=drizzle.config.prod.ts"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.7.2",
