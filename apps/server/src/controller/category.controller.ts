@@ -6,7 +6,6 @@ import { getDb } from "../lib/db";
 import { category, scam } from "../db/schema";
 import { createCategoryReqSchema, updateCategoryReqSchema } from "@/schema/category.schema";
 import { eq } from "drizzle-orm";
-import { paginator } from "@/middleware";
 import { apiKey } from "@/middleware/apiKey";
 
 const { createHandlers } = createFactory<HonoAppType>()

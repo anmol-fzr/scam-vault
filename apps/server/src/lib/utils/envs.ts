@@ -8,7 +8,12 @@ const envs = Object.freeze({
   DB: {
     URL: env.TURSO_DB_URL,
     TOKEN: env.TURSO_DB_TOKEN
-  }
+  },
+  GITHUB: {
+    ID: env.GITHUB_CLIENT_ID,
+    SECRET: env.GITHUB_CLIENT_SECRET
+  },
+  CORS_URL: env.CORS_ORIGIN_URL
 })
 
 export { envs }

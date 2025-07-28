@@ -27,10 +27,9 @@ export const betterAuthOptions: BetterAuthOptions = {
   //   }
   // },
   plugins: [
-    bearer(),
-    openAPI(),
-    admin(),
     organization(),
+    admin(),
+    openAPI(),
     apiKey({
       apiKeyHeaders: ["sv-api-key"],
       rateLimit: {

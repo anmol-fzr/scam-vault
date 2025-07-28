@@ -3,25 +3,28 @@
  *
  * Docs: https://www.better-auth.com/docs/concepts/cli
  */
-import { getDb } from './src/lib/db';
-import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { getDrizzleAdapter } from './src/lib/db';
 import { betterAuth } from 'better-auth';
 import { betterAuthOptions } from './src/lib/better-auth/options';
+import { envs } from '@/lib/utils/envs';
 
-const { CORS_ORIGIN_URL, BETTER_AUTH_URL, BETTER_AUTH_SECRET, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = process.env;
+const { BETTER_AUTH, GITHUB, DB, CORS_URL } = envs
 
-const db = getDb(process.env)
+const database = getDrizzleAdapter({
+  TURSO_DB_URL: DB.URL,
+  TURSO_DB_TOKEN: DB.TOKEN
+})
 
 export const auth: ReturnType<typeof betterAuth> = betterAuth({
   ...betterAuthOptions,
-  database: drizzleAdapter(db, { provider: 'sqlite' }),
-  baseURL: BETTER_AUTH_URL,
-  secret: BETTER_AUTH_SECRET,
+  database,
+  baseURL: BETTER_AUTH.URL,
+  secret: BETTER_AUTH.SECRET,
   socialProviders: {
     github: {
-      clientId: GITHUB_CLIENT_ID,
-      clientSecret: GITHUB_CLIENT_SECRET,
+      clientId: GITHUB.ID,
+      clientSecret: GITHUB.SECRET,
     },
   },
-  trustedOrigins: [CORS_ORIGIN_URL],
+  trustedOrigins: [CORS_URL],
 });
