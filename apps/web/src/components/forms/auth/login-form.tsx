@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Link } from "@tanstack/react-router"
 import { Form } from "@/components/ui/form"
 import { FormInput } from "@/components/form"
 import { useForm } from "react-hook-form"
@@ -89,9 +90,9 @@ export function LoginForm({
         <CardFooter className="items-center justify-center">
           <div className="text-center text-sm">
             Don&apos;t have an account?{" "}
-            <a href="#" className="underline underline-offset-4">
+            <Link to="/auth/signup" className="underline underline-offset-4">
               Sign up
-            </a>
+            </Link>
           </div>
         </CardFooter>
       </Card>

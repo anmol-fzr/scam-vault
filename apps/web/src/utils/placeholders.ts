@@ -18,6 +18,21 @@ const placeholders = Object.freeze({
   },
   getCompanyName() {
     return faker.company.name()
+  },
+
+  getSignUpForm() {
+    const password = this.getPassword()
+    const firstName = faker.person.firstName()
+    const lastName = faker.person.lastName()
+
+    const email = this.getEmail({ firstName, lastName })
+    const name = firstName + " " + lastName
+
+    return {
+      name,
+      email,
+      password
+    }
   }
 })
 

@@ -13,36 +13,42 @@ import { FormInput } from "@/components/form"
 import { useForm } from "react-hook-form"
 import { PasswordInput } from "@/components/password-input"
 import { placeholders } from "@/utils/placeholders"
-import { signIn } from "@/lib/auth-client"
+import { signUp } from "@/lib/auth-client"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { loginSchema } from "@/schema/auth.schema"
+import { signUpSchema } from "@/schema/auth.schema"
 import { toast } from "sonner"
 import { Link } from "@tanstack/react-router"
 import { GithubLogin } from "./github-login"
+import { Route } from "@/routes/auth/signup"
 
+const placeholder = placeholders.getSignUpForm()
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const navigate = Route.useNavigate()
+
   const form = useForm({
-    resolver: zodResolver(loginSchema)
+    resolver: zodResolver(signUpSchema)
   })
 
   const onSubmit = form.handleSubmit(async (data) => {
-    const loginPrms = signIn.email({
+    const signUpPrms = signUp.email({
+      name: data.name,
       email: data.email,
       password: data.password
     })
-    //const resp = await loginPrms
-    toast.promise(loginPrms, {
-      loading: "Logging In...",
+
+    toast.promise(signUpPrms, {
+      loading: "Creating Account ...",
       success: ({ data, error }) => {
         if (data === null) {
-          toast.error("Please Sign Up before Login")
+          toast.error("Unabe to ")
           return;
         }
         console.log(data);
+        navigate({ to: "/dashboard" })
         return "Logged In Successfully"
       },
       error: (err) => {
@@ -65,12 +71,11 @@ export function SignUpForm({
               <div className="flex flex-col gap-4">
                 <Form {...form}>
                   <form onSubmit={onSubmit} className="space-y-4 flex flex-col">
-                    <FormInput name="email" label="Email" placeholder={placeholders.getEmail()} />
-                    <PasswordInput
-                      name="password"
-                      label="Password"
-                      placeholder={placeholders.getPassword()}
-                    />
+
+                    <FormInput name="name" label="Name" placeholder={placeholder.name} />
+                    <FormInput name="email" label="Email" type="email" placeholder={placeholder.email} />
+                    <PasswordInput name="password" label="Password" placeholder={placeholder.password} />
+
                     <Button type="submit" className="w-full">Login</Button>
                   </form>
                 </Form>
