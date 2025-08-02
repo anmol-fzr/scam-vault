@@ -17,15 +17,16 @@ import { signIn } from "@/lib/auth-client"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginSchema } from "@/schema/auth.schema"
 import { toast } from "sonner"
-import { useGithubLogin } from "@/hooks/use-github-login"
-import { GithubLogin } from "./forms/auth/github-login"
 import { Link } from "@tanstack/react-router"
-
+import { GithubLogin } from "./forms/auth/github-login"
+import { Route } from "@/routes/auth/login"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const navigate = Route.useNavigate()
+
   const form = useForm({
     resolver: zodResolver(loginSchema)
   })
@@ -35,7 +36,7 @@ export function LoginForm({
       email: data.email,
       password: data.password
     })
-    //const resp = await loginPrms
+
     toast.promise(loginPrms, {
       loading: "Logging In...",
       success: ({ data, error }) => {
@@ -44,6 +45,9 @@ export function LoginForm({
           return;
         }
         console.log(data);
+        navigate({
+          to: "/dashboard"
+        })
         return "Logged In Successfully"
       },
       error: (err) => {
