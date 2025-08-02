@@ -1,0 +1,9 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "seeder",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-07-30",
+	"observability": {
+		"enabled": true
+	}
+}

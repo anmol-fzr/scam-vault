@@ -2,7 +2,7 @@ import { Hono } from 'hono/quick'
 import { categoryRouter, scamRouter } from '@/router'
 import { cors } from 'hono/cors'
 import { HonoAppType } from './types'
-import { auth } from './lib/better-auth'
+import { auth } from '@/auth'
 
 const app = new Hono<HonoAppType>()
 
@@ -19,7 +19,6 @@ const routes = app
   .route("/category", categoryRouter)
   .route("/scam", scamRouter)
 
-
 app.on(["POST"], '/test', async (c) => {
 
   const resp = await fetch("http://localhost:3000/api/auth/organization/set-active", {
@@ -34,5 +33,10 @@ app.on(["POST"], '/test', async (c) => {
 app.on(['GET', 'POST'], '/api/*', (c) => auth(c.env).handler(c.req.raw));
 
 
-export default app
+export default {
+  fetch: app.fetch,
+  scheduled: async (batch, env) => {
+    console.log(batch, env)
+  },
+}
 export type ApiRoutes = typeof routes

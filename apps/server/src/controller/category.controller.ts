@@ -2,8 +2,8 @@ import type { HonoAppType } from "../types";
 import { createFactory } from "hono/factory";
 import { zValidator } from "@hono/zod-validator";
 
-import { getDb } from "../lib/db";
-import { category, scam } from "../db/schema";
+import { getDb } from "@/db";
+import { category, scam } from "@/db";
 import { createCategoryReqSchema, updateCategoryReqSchema } from "@/schema/category.schema";
 import { eq } from "drizzle-orm";
 import { apiKey } from "@/middleware/apiKey";

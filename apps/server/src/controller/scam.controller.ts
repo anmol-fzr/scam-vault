@@ -1,7 +1,7 @@
-import { getDb } from "@/lib/db";
+import { scam, getDb } from "@/db";
 import type { HonoAppType } from "../types";
 import { createFactory } from "hono/factory";
-import { scam } from "@/db/schema";
+//import { scam } from "@/db/schema";
 import { zValidator } from "@hono/zod-validator";
 import { createScamReqSchema, updateScamReqSchema } from "@/schema/scam.schema";
 import { paginator } from "@/middleware";

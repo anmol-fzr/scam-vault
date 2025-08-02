@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/login-form";
+import { LoginForm } from "@/components/forms";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { getSessionQueryOps } from "@/hooks/auth/useGetSession";
 

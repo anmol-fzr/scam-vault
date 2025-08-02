@@ -16,13 +16,13 @@ export const authClient = createAuthClient({
 });
 
 const {
-  signOut, signIn,
+  signOut, signIn, signUp,
   organization, useListOrganizations, useActiveOrganization,
   apiKey
 } = authClient
 
 export {
-  signIn, signOut,
+  signIn, signOut, signUp,
   organization, useListOrganizations, useActiveOrganization,
   apiKey
 }

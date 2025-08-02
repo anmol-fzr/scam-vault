@@ -1,5 +1,5 @@
 import { Factory } from "hono/factory";
-import { auth } from "@/lib/better-auth";
+import { auth } from "@/auth";
 import { HonoAppType } from "@/types";
 import type { Session, User } from "better-auth"
 

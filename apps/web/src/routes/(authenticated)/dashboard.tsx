@@ -1,5 +1,4 @@
 import { H1 } from "@/components/ui/typography";
-import { authClient } from "@/lib/auth-client";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/(authenticated)/dashboard")({
@@ -7,9 +6,6 @@ export const Route = createFileRoute("/(authenticated)/dashboard")({
 });
 
 function RouteComponent() {
-  authClient.$fetch("http://localhost:3000/test", {
-    method: "POST"
-  })
   return (
     <div className="h-full">
       <H1>Dashboard</H1>
