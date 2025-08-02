@@ -1,6 +1,6 @@
 import { createAuthClient } from "better-auth/react";
 import { organizationClient, apiKeyClient } from "better-auth/client/plugins"
-//import { envs } from "@/utils/envs";
+import { envs } from "@/utils/envs";
 import type { Organization as Org } from 'better-auth/plugins/organization'
 
 interface Organization extends Org {
@@ -8,7 +8,7 @@ interface Organization extends Org {
 }
 
 export const authClient = createAuthClient({
-  //baseURL: envs.SERVER_URL,
+  baseURL: envs.SERVER_URL,
   plugins: [
     organizationClient(),
     apiKeyClient()
