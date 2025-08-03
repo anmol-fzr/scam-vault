@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "wrangler dev --env=dev --config ../../wrangler.jsonc ",
     "dev-s":"npx wrangler dev --test-scheduled",
-    "deploy": "wrangler deploy --config ../../wrangler.jsonc --minify --dry-run -e=dev",
+    "deploy": "wrangler deploy --config ../../wrangler.jsonc --name api --minify -e=dev",
     "cf-typegen": "wrangler types --env dev --env-interface CloudflareBindings"
   },
   "dependencies": {
